@@ -17,4 +17,6 @@ Future<void> setupDI() async {
   sl.registerLazySingleton(() => CategoryRepository(sl()));
 
   sl.registerLazySingleton(() => StoryRepository(sl()));
+
+  sl.registerLazySingleton(() => StoryCategoriesRepository(sl()));
 }

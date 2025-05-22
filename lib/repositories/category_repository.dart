@@ -5,7 +5,7 @@ import 'package:stories_data/models/category_model.dart';
 
 class CategoryRepository {
   final RestClient _restClient;
-
+  
   CategoryRepository(this._restClient);
 
   Future<List<CategoryModel>> getCategories() async {

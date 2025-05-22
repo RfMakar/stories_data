@@ -66,4 +66,17 @@ abstract class RestClient {
 
   @DELETE(EndPoints.category)
   Future<void> deleteCategories();
+
+  //StoryCategories
+  @POST('${EndPoints.story}{storyId}/${EndPoints.categories}{categoryId}')
+  Future<void> createCategoryToStory({
+    @Path() required String storyId,
+    @Path() required String categoryId,
+  });
+
+  @DELETE('${EndPoints.story}{storyId}/${EndPoints.categories}{categoryId}')
+  Future<void> deleteCategoryToStory({
+    @Path() required String storyId,
+    @Path() required String categoryId,
+  });
 }

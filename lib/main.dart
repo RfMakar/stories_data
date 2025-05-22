@@ -6,9 +6,9 @@ import 'package:stories_data/repositories/index.dart';
 
 Future<void> main(List<String> args) async {
   await setupDI();
-
-  await _testCategoryApi();
-  await _testStoryApi();
+  // await _testCategoryApi();
+  // await _testStoryApi();
+  await _testStoryCategoriesApi();
 }
 
 Future<void> _testCategoryApi() async {
@@ -96,4 +96,36 @@ Future<void> _testStoryApi() async {
   await storyRepository.deleteStories();
 
   logger.i('Сказки удалены');
+}
+
+Future<void> _testStoryCategoriesApi() async {
+  final categoryRepository = sl<CategoryRepository>();
+  final storyRepository = sl<StoryRepository>();
+  final storyCategoriesRepository = sl<StoryCategoriesRepository>();
+
+  final createCategory = await categoryRepository.createCategory(
+    name: 'Новая категория3',
+    icon: File('assets/img_1.png'),
+  );
+  final createStory = await storyRepository.createStory(
+    title: 'Новая сказка',
+    content: 'Контент сказки',
+    image: File('assets/img_1.png'),
+  );
+
+  final categoryId = createCategory.id;
+  final storyId = createStory.id;
+
+  await storyCategoriesRepository.createCategoryToStory(
+    storyId: storyId,
+    categoryId: categoryId,
+  );
+
+  logger.i('Связь категории с историей создана');
+
+  // await storyCategoriesRepository.deleteCategoryToStory(
+  //   storyId: storyId,
+  //   categoryId: categoryId,
+  // );
+  // logger.i('Связь категории с историей удалена');
 }
