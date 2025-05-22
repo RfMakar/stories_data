@@ -3,10 +3,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:stories_data/core/di.dart';
 import 'package:stories_data/core/utils/logger.dart';
-import 'package:stories_data/repositories/index.dart';
+import 'package:dotenv/dotenv.dart';
+import 'package:stories_data/stories_data.dart';
 
 Future<void> main(List<String> args) async {
-  await setupDI();
+  final env = DotEnv(includePlatformEnvironment: true)..load();
+  final apiKey = env['API_KEY'] ?? "";
+  await StoriesData.init(apiKey: apiKey);
 
   try {
     await _testCategoryApi();

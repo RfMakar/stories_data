@@ -6,9 +6,9 @@ import 'package:stories_data/stories_data.dart';
 
 final sl = GetIt.instance;
 
-Future<void> setupDI() async {
+Future<void> setupDI({required String apiKey}) async {
   //Dio
-  sl.registerLazySingleton(() => DioClient(dio: Dio())..init());
+  sl.registerLazySingleton(() => DioClient(dio: Dio(), apiKey: apiKey)..init());
 
   //RestClient
   sl.registerLazySingleton(() => RestClient(sl<DioClient>().dio));

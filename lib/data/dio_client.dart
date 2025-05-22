@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:dotenv/dotenv.dart';
-
-final _env = DotEnv(includePlatformEnvironment: true)..load();
 
 class DioClient {
   final Dio _dio;
+  final String _apiKey;
 
-  DioClient({required Dio dio}) : _dio = dio;
+  DioClient({required Dio dio, required String apiKey})
+    : _dio = dio,
+      _apiKey = apiKey;
 
   Dio get dio => _dio;
 
@@ -21,7 +21,7 @@ class DioClient {
       ),
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          options.headers['x-api-key'] = _env['API_KEY'];
+          options.headers['x-api-key'] = _apiKey;
           return handler.next(options);
         },
         onError: (error, handler) {
