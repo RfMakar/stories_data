@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:dotenv/dotenv.dart';
-import 'package:stories_data/core/utils/logger.dart';
 
 final _env = DotEnv(includePlatformEnvironment: true)..load();
 
@@ -26,9 +25,8 @@ class DioClient {
           return handler.next(options);
         },
         onError: (error, handler) {
-          final errorMsg = error.response?.data['error'] as String;
-          logger.e(errorMsg);
-          return handler.next(error);
+          final message = error.response?.data['error'] as String;
+          return handler.next(error.copyWith(message: message));
         },
       ),
     ]);

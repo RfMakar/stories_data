@@ -1,14 +1,24 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:stories_data/core/di.dart';
 import 'package:stories_data/core/utils/logger.dart';
 import 'package:stories_data/repositories/index.dart';
 
 Future<void> main(List<String> args) async {
   await setupDI();
-  // await _testCategoryApi();
-  // await _testStoryApi();
-  await _testStoryCategoriesApi();
+
+  try {
+    await _testCategoryApi();
+    await _testStoryApi();
+    await _testStoryCategoriesApi();
+  } on DioException catch (e) {
+    final code = e.response?.statusCode;
+    final msg = e.message;
+    logger.e('Code: $code, Msg: $msg');
+  } catch (e) {
+    logger.e(e.toString());
+  }
 }
 
 Future<void> _testCategoryApi() async {
@@ -115,17 +125,20 @@ Future<void> _testStoryCategoriesApi() async {
 
   final categoryId = createCategory.id;
   final storyId = createStory.id;
-
-  await storyCategoriesRepository.createCategoryToStory(
-    storyId: storyId,
-    categoryId: categoryId,
-  );
+  try {
+    await storyCategoriesRepository.createCategoryToStory(
+      storyId: storyId,
+      categoryId: categoryId,
+    );
+  } catch (e) {
+    logger.e(e.toString());
+  }
 
   logger.i('Связь категории с историей создана');
 
-  // await storyCategoriesRepository.deleteCategoryToStory(
-  //   storyId: storyId,
-  //   categoryId: categoryId,
-  // );
-  // logger.i('Связь категории с историей удалена');
+  await storyCategoriesRepository.deleteCategoryToStory(
+    storyId: storyId,
+    categoryId: categoryId,
+  );
+  logger.i('Связь категории с историей удалена');
 }
