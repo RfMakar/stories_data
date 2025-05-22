@@ -7,12 +7,39 @@ import 'package:stories_data/core/endpoints.dart';
 
 import '../models/index.dart';
 
-
 part 'rest_client.g.dart';
 
 @RestApi(baseUrl: apiUrl)
 abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
+
+  //Story
+  @GET(EndPoints.story)
+  Future<List<StoryModel>> getStories();
+
+  @GET('${EndPoints.story}{id}')
+  Future<StoryModel> getStory({@Path() required String id});
+
+  @POST(EndPoints.story)
+  Future<StoryModel> createStory({
+    @Part() required String title,
+    @Part() required String content,
+    @Part() required File image,
+  });
+
+  @PUT('${EndPoints.story}{id}')
+  Future<StoryModel> updateStory({
+    @Path() required String id,
+    @Part() String? title,
+    @Part() String? content,
+    @Part() File? image,
+  });
+
+  @DELETE('${EndPoints.story}{id}')
+  Future<void> deleteStory({@Path() required String id});
+
+  @DELETE(EndPoints.story)
+  Future<void> deleteStories();
 
   //Category
   @GET(EndPoints.category)
