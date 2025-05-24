@@ -1,8 +1,8 @@
 
-import 'package:stories_data/core/di.dart';
+import 'package:stories_data/core/di_stories_data.dart';
 
 class StoriesData {
   static Future<void> init({required String apiKey}) async {
-    await setupDI(apiKey: apiKey);
+    await setupDiStroiesData(apiKey: apiKey);
   }
 }

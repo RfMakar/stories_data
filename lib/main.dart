@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:stories_data/core/di.dart';
+import 'package:stories_data/core/di_stories_data.dart';
 import 'package:stories_data/core/utils/logger.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:stories_data/stories_data.dart';
@@ -25,7 +25,7 @@ Future<void> main(List<String> args) async {
 }
 
 Future<void> _testCategoryApi() async {
-  final categoryRepository = sl<CategoryRepository>();
+  final categoryRepository = diStoriesData<CategoryRepository>();
 
   final createCategory = await categoryRepository.createCategory(
     name: 'Новая категория3',
@@ -67,7 +67,7 @@ Future<void> _testCategoryApi() async {
 }
 
 Future<void> _testStoryApi() async {
-  final storyRepository = sl<StoryRepository>();
+  final storyRepository = diStoriesData<StoryRepository>();
 
   final createStory = await storyRepository.createStory(
     title: 'Новая сказка',
@@ -112,9 +112,9 @@ Future<void> _testStoryApi() async {
 }
 
 Future<void> _testStoryCategoriesApi() async {
-  final categoryRepository = sl<CategoryRepository>();
-  final storyRepository = sl<StoryRepository>();
-  final storyCategoriesRepository = sl<StoryCategoriesRepository>();
+  final categoryRepository = diStoriesData<CategoryRepository>();
+  final storyRepository = diStoriesData<StoryRepository>();
+  final storyCategoriesRepository = diStoriesData<StoryCategoriesRepository>();
 
   final createCategory = await categoryRepository.createCategory(
     name: 'Новая категория3',
