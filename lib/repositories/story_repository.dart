@@ -20,11 +20,13 @@ class StoryRepository {
 
   Future<StoryModel> createStory({
     required String title,
+    required String description,
     required String content,
     required File image,
   }) async {
     final res = await _restClient.createStory(
       title: title,
+      description: description,
       content: content,
       image: image,
     );
@@ -34,12 +36,14 @@ class StoryRepository {
   Future<StoryModel> updateStory({
     required String id,
     String? title,
+    String? description,
     String? content,
     File? image,
   }) async {
     final res = await _restClient.updateStory(
       id: id,
       title: title,
+      description: description,
       content: content,
       image: image,
     );

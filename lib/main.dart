@@ -72,6 +72,7 @@ Future<void> _testStoryApi() async {
 
   final createStory = await storyRepository.createStory(
     title: 'Новая сказка',
+    description: 'Описанме сказки',
     content: 'Контент сказки',
     image: File('assets/img_1.png'),
   );
@@ -83,6 +84,7 @@ Future<void> _testStoryApi() async {
   await storyRepository.updateStory(
     id: storyId,
     title: 'Обновленная сказка',
+    description: 'ddddd',
     content: 'Обновленный контент сказки',
     image: File('assets/img_2.png'),
   );
@@ -103,6 +105,7 @@ Future<void> _testStoryApi() async {
 
   await storyRepository.createStory(
     title: 'Новая сказка',
+    description: 'Jgbcfybt cdsdf',
     content: 'Контент сказки',
     image: File('assets/img_1.png'),
   );
@@ -123,6 +126,7 @@ Future<void> _testStoryCategoriesApi() async {
   );
   final createStory = await storyRepository.createStory(
     title: 'Новая сказка',
+    description: 'уаукаа',
     content: 'Контент сказки',
     image: File('assets/img_1.png'),
   );

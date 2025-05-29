@@ -81,6 +81,7 @@ class _RestClient implements RestClient {
   @override
   Future<StoryModel> createStory({
     required String title,
+    required String description,
     required String content,
     required File image,
   }) async {
@@ -89,6 +90,7 @@ class _RestClient implements RestClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('title', title));
+    _data.fields.add(MapEntry('description', description));
     _data.fields.add(MapEntry('content', content));
     _data.files.add(
       MapEntry(
@@ -124,6 +126,7 @@ class _RestClient implements RestClient {
   Future<StoryModel> updateStory({
     required String id,
     String? title,
+    String? description,
     String? content,
     File? image,
   }) async {
@@ -134,6 +137,9 @@ class _RestClient implements RestClient {
     final _data = FormData();
     if (title != null) {
       _data.fields.add(MapEntry('title', title));
+    }
+    if (description != null) {
+      _data.fields.add(MapEntry('description', description));
     }
     if (content != null) {
       _data.fields.add(MapEntry('content', content));

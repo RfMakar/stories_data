@@ -23,6 +23,7 @@ abstract class RestClient {
   @POST(EndPoints.story)
   Future<StoryModel> createStory({
     @Part() required String title,
+    @Part() required String description,
     @Part() required String content,
     @Part() required File image,
   });
@@ -31,6 +32,7 @@ abstract class RestClient {
   Future<StoryModel> updateStory({
     @Path() required String id,
     @Part() String? title,
+    @Part() String? description,
     @Part() String? content,
     @Part() File? image,
   });
