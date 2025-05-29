@@ -79,4 +79,15 @@ abstract class RestClient {
     @Path() required String storyId,
     @Path() required String categoryId,
   });
+
+  //StoryPopular
+  @GET(EndPoints.storyPopular)
+  Future<StoryModel> getStoryPopular({
+    @Query('filter') required String? filter, // Period
+  });
+
+  @GET(EndPoints.storyPopular)
+  Future<List<StoryModel>> getStoriesPopular({
+    @Query('filter') required String? filter, // Period
+  });
 }

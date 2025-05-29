@@ -15,6 +15,7 @@ Future<void> main(List<String> args) async {
     await _testCategoryApi();
     await _testStoryApi();
     await _testStoryCategoriesApi();
+    await _testStoryPopularApi();
   } on DioException catch (e) {
     final code = e.response?.statusCode;
     final msg = e.message;
@@ -144,4 +145,20 @@ Future<void> _testStoryCategoriesApi() async {
     categoryId: categoryId,
   );
   logger.i('Связь категории с историей удалена');
+}
+
+Future<void> _testStoryPopularApi() async {
+  final storyPopularRepository = diStoriesData<StoryPopularRepository>();
+
+  await storyPopularRepository.getStoryTopToDay();
+  logger.i('Получена сказка популярная за день');
+
+  await storyPopularRepository.getStoriesTopToWeek();
+  logger.i('Получены популярные сказки за неделю');
+
+  await storyPopularRepository.getStoriesTopToMonth();
+  logger.i('Получены популярные сказки за неделю');
+
+  await storyPopularRepository.getStoriesNew();
+  logger.i('Получены новые сказки');
 }
