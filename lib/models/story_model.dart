@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:stories_data/models/category_model.dart';
 
 part 'story_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class StoryModel {
+class StoryModel extends Equatable {
   final String id;
   final String title;
   final String description;
@@ -29,4 +30,16 @@ class StoryModel {
       _$StoryModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$StoryModelToJson(this);
+
+  @override
+  List<Object?> get props => [
+    id,
+    title,
+    description,
+    content,
+    image,
+    createdAt,
+    readCount,
+    categories,
+  ];
 }
