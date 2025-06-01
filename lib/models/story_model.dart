@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:stories_data/core/constans.dart';
 import 'package:stories_data/models/category_model.dart';
 
 part 'story_model.g.dart';
@@ -30,6 +31,8 @@ class StoryModel extends Equatable {
       _$StoryModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$StoryModelToJson(this);
+
+    String get imageUrl => '$apiUrl$image';
 
   @override
   List<Object?> get props => [
