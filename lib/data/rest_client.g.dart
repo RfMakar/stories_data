@@ -10,7 +10,7 @@ part of 'rest_client.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://storieskids.ru/';
+    baseUrl ??= 'https://storieskids.ru/';
   }
 
   final Dio _dio;
