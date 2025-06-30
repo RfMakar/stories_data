@@ -5,7 +5,12 @@ import 'package:stories_data/core/di_stories_data.dart';
 import 'package:stories_data/core/utils/logger.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:stories_data/stories_data.dart';
-
+///
+///
+///Не запускай на проде тесты!!!
+///
+///
+///
 Future<void> main(List<String> args) async {
   final env = DotEnv(includePlatformEnvironment: true)..load();
   final apiKey = env['API_KEY'] ?? "";
@@ -16,6 +21,8 @@ Future<void> main(List<String> args) async {
     await _testStoryApi();
     await _testStoryCategoriesApi();
     await _testStoryPopularApi();
+    await _testSearchCategoryApi();
+    await _testSearchStoryApi();
   } on DioException catch (e) {
     final code = e.response?.statusCode;
     final msg = e.message;
@@ -165,4 +172,54 @@ Future<void> _testStoryPopularApi() async {
 
   await storyPopularRepository.getStoriesNew();
   logger.i('Получены новые сказки');
+}
+
+Future<void> _testSearchCategoryApi() async {
+  final categoryRepository = diStoriesData<CategoryRepository>();
+  final searchRepository = diStoriesData<SearchRepository>();
+
+  final createCategory = await categoryRepository.createCategory(
+    name: 'Новая категория для поиска',
+    icon: File('assets/img_1.png'),
+  );
+
+  logger.i('Категория для поиска создана');
+
+  final categories = await searchRepository.getSearchCategories(
+    query: 'НОВАЯ',
+  );
+  logger.i('Поиск категорий успешный');
+  logger.i(categories.toString());
+
+  final categoryId = createCategory.id;
+
+  await categoryRepository.deleteCategory(id: categoryId);
+
+  logger.i('Категория удалена');
+}
+
+Future<void> _testSearchStoryApi() async {
+  final searchRepository = diStoriesData<SearchRepository>();
+  final storyRepository = diStoriesData<StoryRepository>();
+
+  final createStory = await storyRepository.createStory(
+    title: 'Новая сказка',
+    description: 'Описанме сказки',
+    content: 'Контент сказки',
+    image: File('assets/img_1.png'),
+  );
+
+  logger.i('Сказка для поиска создана');
+
+  final stories = await searchRepository.getSearchStories(
+    query: 'НовАЯ сказка',
+  );
+  logger.i('Поиск сказок успешный');
+  logger.i(stories.toString());
+
+  final storyId = createStory.id;
+
+  await storyRepository.deleteStory(id: storyId);
+
+  logger.i('Сказка для поиска удалена');
 }

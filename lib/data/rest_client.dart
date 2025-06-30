@@ -92,4 +92,17 @@ abstract class RestClient {
   Future<List<StoryModel>> getStoriesPopular({
     @Query('filter') required String? filter, // Period
   });
+
+  //Search
+  @GET(EndPoints.search)
+  Future<List<CategoryModel>> getSearchCategories({
+    @Query('query') required String query,
+    @Query('type') String type = 'category',
+  });
+
+  @GET(EndPoints.search)
+  Future<List<StoryModel>> getSearchStories({
+    @Query('query') required String query,
+    @Query('type') String type = 'story',
+  });
 }
