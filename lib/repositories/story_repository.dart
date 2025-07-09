@@ -8,8 +8,8 @@ class StoryRepository {
 
   StoryRepository(this._restClient);
 
-  Future<List<StoryModel>> getStories() async {
-    final res = await _restClient.getStories();
+  Future<List<StoryModel>> getStories({String? categoryId}) async {
+    final res = await _restClient.getStories(categoryId: categoryId);
     return res;
   }
 

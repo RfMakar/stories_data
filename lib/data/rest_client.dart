@@ -15,7 +15,7 @@ abstract class RestClient {
 
   //Story
   @GET(EndPoints.story)
-  Future<List<StoryModel>> getStories();
+  Future<List<StoryModel>> getStories({@Query('categoryId') String? categoryId});
 
   @GET('${EndPoints.story}{id}')
   Future<StoryModel> getStory({@Path() required String id});
