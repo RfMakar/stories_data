@@ -15,7 +15,9 @@ abstract class RestClient {
 
   //Story
   @GET(EndPoints.story)
-  Future<List<StoryModel>> getStories({@Query('categoryId') String? categoryId});
+  Future<List<StoryModel>> getStories({
+    @Query('categoryId') String? categoryId,
+  });
 
   @GET('${EndPoints.story}{id}')
   Future<StoryModel> getStory({@Path() required String id});
@@ -83,6 +85,9 @@ abstract class RestClient {
   });
 
   //StoryPopular
+  @PUT('${EndPoints.category}{storyId}')
+  Future<CategoryModel> updateStoryReads({@Path() required String storyId});
+
   @GET(EndPoints.storyPopular)
   Future<StoryModel> getStoryPopular({
     @Query('filter') required String? filter, // Period

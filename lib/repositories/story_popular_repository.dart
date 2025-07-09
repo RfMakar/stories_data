@@ -7,24 +7,22 @@ class StoryPopularRepository {
 
   StoryPopularRepository(this._restClient);
 
+  Future<void> updateStoryReads({required String storyId}) async {
+    await _restClient.updateStoryReads(storyId: storyId);
+  }
+
   Future<StoryModel> getStoryTopToDay() async {
-    final res = await _restClient.getStoryPopular(
-      filter: Period.day.name,
-    );
+    final res = await _restClient.getStoryPopular(filter: Period.day.name);
     return res;
   }
 
   Future<List<StoryModel>> getStoriesTopToWeek() async {
-    final res = await _restClient.getStoriesPopular(
-      filter: Period.week.name,
-    );
+    final res = await _restClient.getStoriesPopular(filter: Period.week.name);
     return res;
   }
 
   Future<List<StoryModel>> getStoriesTopToMonth() async {
-    final res = await _restClient.getStoriesPopular(
-      filter: Period.month.name,
-    );
+    final res = await _restClient.getStoriesPopular(filter: Period.month.name);
     return res;
   }
 
