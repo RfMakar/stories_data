@@ -457,7 +457,7 @@ class _RestClient implements RestClient {
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'category/${storyId}',
+            'story_popular/${storyId}',
             queryParameters: queryParameters,
             data: _data,
           )

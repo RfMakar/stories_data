@@ -85,7 +85,7 @@ abstract class RestClient {
   });
 
   //StoryPopular
-  @PUT('${EndPoints.category}{storyId}')
+  @PUT('${EndPoints.storyPopular}{storyId}')
   Future<CategoryModel> updateStoryReads({@Path() required String storyId});
 
   @GET(EndPoints.storyPopular)
