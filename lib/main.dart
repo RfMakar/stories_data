@@ -17,12 +17,12 @@ Future<void> main(List<String> args) async {
   await StoriesData.init(apiKey: apiKey);
 
   try {
-    await _testCategoryApi();
+    // await _testCategoryApi();
     await _testStoryApi();
-    await _testStoryCategoriesApi();
-    await _testStoryPopularApi();
-    await _testSearchCategoryApi();
-    await _testSearchStoryApi();
+    // await _testStoryCategoriesApi();
+    // await _testStoryPopularApi();
+    // await _testSearchCategoryApi();
+    // await _testSearchStoryApi();
   } on DioException catch (e) {
     final code = e.response?.statusCode;
     final msg = e.message;
@@ -82,6 +82,7 @@ Future<void> _testStoryApi() async {
     description: 'Описанме сказки',
     content: 'Контент сказки',
     image: File('assets/img_1.png'),
+    audio: File('assets/audio_1.m4a'),
   );
 
   logger.i('Сказка создана');
@@ -94,32 +95,33 @@ Future<void> _testStoryApi() async {
     description: 'ddddd',
     content: 'Обновленный контент сказки',
     image: File('assets/img_2.png'),
+    audio: File('assets/audio_2.m4a'),
   );
 
-  logger.i('Сказка обновлена');
+  logger.i('Сказка обновлена и добавлена аудио');
 
   await storyRepository.getStory(id: storyId);
 
   logger.i('Сказка получена');
 
-  await storyRepository.getStories();
+  // await storyRepository.getStories();
 
-  logger.i('Сказки получены');
+  // logger.i('Сказки получены');
 
-  await storyRepository.deleteStory(id: storyId);
+  // await storyRepository.deleteStory(id: storyId);
 
-  logger.i('Сказка удалена');
+  // logger.i('Сказка удалена');
 
-  await storyRepository.createStory(
-    title: 'Новая сказка',
-    description: 'Jgbcfybt cdsdf',
-    content: 'Контент сказки',
-    image: File('assets/img_1.png'),
-  );
+  // await storyRepository.createStory(
+  //   title: 'Новая сказка',
+  //   description: 'Jgbcfybt cdsdf',
+  //   content: 'Контент сказки',
+  //   image: File('assets/img_1.png'),
+  // );
 
-  await storyRepository.deleteStories();
+  // await storyRepository.deleteStories();
 
-  logger.i('Сказки удалены');
+  // logger.i('Сказки удалены');
 }
 
 Future<void> _testStoryCategoriesApi() async {

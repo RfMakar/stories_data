@@ -28,6 +28,7 @@ abstract class RestClient {
     @Part() required String description,
     @Part() required String content,
     @Part() required File image,
+    @Part() File? audio,
   });
 
   @PUT('${EndPoints.story}{id}')
@@ -37,6 +38,7 @@ abstract class RestClient {
     @Part() String? description,
     @Part() String? content,
     @Part() File? image,
+    @Part() File? audio,
   });
 
   @DELETE('${EndPoints.story}{id}')

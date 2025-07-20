@@ -23,12 +23,14 @@ class StoryRepository {
     required String description,
     required String content,
     required File image,
+    File? audio,
   }) async {
     final res = await _restClient.createStory(
       title: title,
       description: description,
       content: content,
       image: image,
+      audio: audio,
     );
     return res;
   }
@@ -39,6 +41,7 @@ class StoryRepository {
     String? description,
     String? content,
     File? image,
+    File? audio,
   }) async {
     final res = await _restClient.updateStory(
       id: id,
@@ -46,6 +49,7 @@ class StoryRepository {
       description: description,
       content: content,
       image: image,
+      audio: audio,
     );
     return res;
   }

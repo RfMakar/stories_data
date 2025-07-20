@@ -85,9 +85,11 @@ class _RestClient implements RestClient {
     required String description,
     required String content,
     required File image,
+    File? audio,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('title', title));
@@ -102,6 +104,19 @@ class _RestClient implements RestClient {
         ),
       ),
     );
+    if (audio != null) {
+      if (audio != null) {
+        _data.files.add(
+          MapEntry(
+            'audio',
+            MultipartFile.fromFileSync(
+              audio.path,
+              filename: audio.path.split(Platform.pathSeparator).last,
+            ),
+          ),
+        );
+      }
+    }
     final _options = _setStreamType<StoryModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -130,6 +145,7 @@ class _RestClient implements RestClient {
     String? description,
     String? content,
     File? image,
+    File? audio,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -153,6 +169,19 @@ class _RestClient implements RestClient {
             MultipartFile.fromFileSync(
               image.path,
               filename: image.path.split(Platform.pathSeparator).last,
+            ),
+          ),
+        );
+      }
+    }
+    if (audio != null) {
+      if (audio != null) {
+        _data.files.add(
+          MapEntry(
+            'audio',
+            MultipartFile.fromFileSync(
+              audio.path,
+              filename: audio.path.split(Platform.pathSeparator).last,
             ),
           ),
         );
