@@ -34,7 +34,9 @@ class StoryModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$StoryModelToJson(this);
 
-    String get imageUrl => '$apiUrl$image';
+  String get imageUrl => '$apiUrl$image';
+
+  String get audioUrl => '$apiUrl$audio';
 
   @override
   List<Object?> get props => [
