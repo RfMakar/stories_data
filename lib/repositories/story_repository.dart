@@ -54,6 +54,11 @@ class StoryRepository {
     return res;
   }
 
+  Future<StoryModel> deleteAudioStory({required String id}) async {
+    final res = await _restClient.deleteAudioStory(id: id);
+    return res;
+  }
+
   Future<void> deleteStory({required String id}) async {
     await _restClient.deleteStory(id: id);
   }

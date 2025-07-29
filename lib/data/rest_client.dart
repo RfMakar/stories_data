@@ -41,6 +41,9 @@ abstract class RestClient {
     @Part() File? audio,
   });
 
+  @DELETE('${EndPoints.story}{id}/audio')
+  Future<StoryModel> deleteAudioStory({@Path() required String id});
+
   @DELETE('${EndPoints.story}{id}')
   Future<void> deleteStory({@Path() required String id});
 
