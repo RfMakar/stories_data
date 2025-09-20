@@ -5,6 +5,7 @@ import 'package:stories_data/core/di_stories_data.dart';
 import 'package:stories_data/core/utils/logger.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:stories_data/stories_data.dart';
+
 ///
 ///
 ///Не запускай на проде тесты!!!
@@ -17,8 +18,9 @@ Future<void> main(List<String> args) async {
   await StoriesData.init(apiKey: apiKey);
 
   try {
+    await _testCategoryTypeApi();
     // await _testCategoryApi();
-    await _testStoryApi();
+    // await _testStoryApi();
     // await _testStoryCategoriesApi();
     // await _testStoryPopularApi();
     // await _testSearchCategoryApi();
@@ -32,12 +34,50 @@ Future<void> main(List<String> args) async {
   }
 }
 
+Future<void> _testCategoryTypeApi() async {
+  final categoryTypeRepository = diStoriesData<CategoryTypeRepository>();
+
+  final createTypeCategory = await categoryTypeRepository.createCategoryType(
+    name: 'Тип категории время',
+  );
+
+  logger.i('Тип категории создан');
+
+  final categoryTypeId = createTypeCategory.id;
+
+  await categoryTypeRepository.updateCategoryType(
+    id: categoryTypeId,
+    name: 'Обновленный Тип категории время',
+  );
+
+  logger.i('Тип категории обновлен');
+
+  await categoryTypeRepository.getCategoryType(id: categoryTypeId);
+
+  logger.i('Тип категории получен');
+
+  await categoryTypeRepository.getCategoriesTypes();
+
+  logger.i('Все типы категории получены');
+
+  await categoryTypeRepository.deleteCategoryType(id: categoryTypeId);
+
+  logger.i('Тип категории удален');
+
+  await categoryTypeRepository.createCategoryType(name: 'Тип категории время');
+
+  await categoryTypeRepository.deleteCategoriesTypes();
+
+  logger.i('Все типы категории удалены');
+}
+
 Future<void> _testCategoryApi() async {
   final categoryRepository = diStoriesData<CategoryRepository>();
 
   final createCategory = await categoryRepository.createCategory(
     name: 'Новая категория3',
     icon: File('assets/img_1.png'),
+    typeId: '',
   );
 
   logger.i('Категория создана');
@@ -67,6 +107,7 @@ Future<void> _testCategoryApi() async {
   await categoryRepository.createCategory(
     name: 'Новая категория3',
     icon: File('assets/img_1.png'),
+    typeId: '',
   );
 
   await categoryRepository.deleteCategories();
@@ -132,6 +173,7 @@ Future<void> _testStoryCategoriesApi() async {
   final createCategory = await categoryRepository.createCategory(
     name: 'Новая категория3',
     icon: File('assets/img_1.png'),
+    typeId: '',
   );
   final createStory = await storyRepository.createStory(
     title: 'Новая сказка',
@@ -183,13 +225,12 @@ Future<void> _testSearchCategoryApi() async {
   final createCategory = await categoryRepository.createCategory(
     name: 'Новая категория для поиска',
     icon: File('assets/img_1.png'),
+    typeId: '',
   );
 
   logger.i('Категория для поиска создана');
 
-  final categories = await searchRepository.getSearchCategories(
-    query: 'НОВАЯ',
-  );
+  final categories = await searchRepository.getSearchCategories(query: 'НОВАЯ');
   logger.i('Поиск категорий успешный');
   logger.i(categories.toString());
 

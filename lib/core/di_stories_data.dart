@@ -16,6 +16,8 @@ Future<void> setupDiStroiesData({required String apiKey}) async {
   //Repositories
   diStoriesData.registerLazySingleton(() => CategoryRepository(diStoriesData()));
 
+   diStoriesData.registerLazySingleton(() => CategoryTypeRepository(diStoriesData()));
+
   diStoriesData.registerLazySingleton(() => StoryRepository(diStoriesData()));
 
   diStoriesData.registerLazySingleton(() => StoryCategoriesRepository(diStoriesData()));

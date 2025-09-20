@@ -336,6 +336,7 @@ class _RestClient implements RestClient {
   @override
   Future<CategoryModel> createCategory({
     required String name,
+    required String typeId,
     required File icon,
   }) async {
     final _extra = <String, dynamic>{};
@@ -343,6 +344,7 @@ class _RestClient implements RestClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('name', name));
+    _data.fields.add(MapEntry('type_id', typeId));
     _data.files.add(
       MapEntry(
         'icon',
@@ -377,6 +379,7 @@ class _RestClient implements RestClient {
   Future<CategoryModel> updateCategory({
     required String id,
     String? name,
+    String? typeId,
     File? icon,
   }) async {
     final _extra = <String, dynamic>{};
@@ -386,6 +389,9 @@ class _RestClient implements RestClient {
     final _data = FormData();
     if (name != null) {
       _data.fields.add(MapEntry('name', name));
+    }
+    if (typeId != null) {
+      _data.fields.add(MapEntry('type_id', typeId));
     }
     if (icon != null) {
       if (icon != null) {
@@ -451,6 +457,163 @@ class _RestClient implements RestClient {
           .compose(
             _dio.options,
             'category/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<List<CategoryTypeModel>> getCategoriesTypes() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<CategoryTypeModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<CategoryTypeModel> _value;
+    try {
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    CategoryTypeModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CategoryTypeModel> getCategoryType({required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<CategoryTypeModel>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CategoryTypeModel _value;
+    try {
+      _value = CategoryTypeModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CategoryTypeModel> createCategoryType({required String name}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry('name', name));
+    final _options = _setStreamType<CategoryTypeModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CategoryTypeModel _value;
+    try {
+      _value = CategoryTypeModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CategoryTypeModel> updateCategoryType({
+    required String id,
+    required String name,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry('name', name));
+    final _options = _setStreamType<CategoryTypeModel>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CategoryTypeModel _value;
+    try {
+      _value = CategoryTypeModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> deleteCategoryType({required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> deleteCategoriesTypes() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'category_type/',
             queryParameters: queryParameters,
             data: _data,
           )

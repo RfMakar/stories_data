@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:stories_data/core/constans.dart';
 import 'package:stories_data/core/endpoints.dart';
+import 'package:stories_data/models/category_type_model.dart';
 
 import '../models/index.dart';
 
@@ -60,6 +61,7 @@ abstract class RestClient {
   @POST(EndPoints.category)
   Future<CategoryModel> createCategory({
     @Part() required String name,
+    @Part(name: 'type_id') required String typeId,
     @Part() required File icon,
   });
 
@@ -67,6 +69,7 @@ abstract class RestClient {
   Future<CategoryModel> updateCategory({
     @Path() required String id,
     @Part() String? name,
+    @Part(name: 'type_id') String? typeId,
     @Part() File? icon,
   });
 
@@ -75,6 +78,28 @@ abstract class RestClient {
 
   @DELETE(EndPoints.category)
   Future<void> deleteCategories();
+
+  //CategoryType
+  @GET(EndPoints.categoryType)
+  Future<List<CategoryTypeModel>> getCategoriesTypes();
+
+  @GET('${EndPoints.categoryType}{id}')
+  Future<CategoryTypeModel> getCategoryType({@Path() required String id});
+
+  @POST(EndPoints.categoryType)
+  Future<CategoryTypeModel> createCategoryType({@Part() required String name});
+
+  @PUT('${EndPoints.categoryType}{id}')
+  Future<CategoryTypeModel> updateCategoryType({
+    @Path() required String id,
+    @Part() required String name,
+  });
+
+  @DELETE('${EndPoints.categoryType}{id}')
+  Future<void> deleteCategoryType({@Path() required String id});
+
+  @DELETE(EndPoints.categoryType)
+  Future<void> deleteCategoriesTypes();
 
   //StoryCategories
   @POST('${EndPoints.story}{storyId}/${EndPoints.categories}{categoryId}')

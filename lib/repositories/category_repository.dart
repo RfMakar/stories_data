@@ -5,7 +5,7 @@ import 'package:stories_data/models/category_model.dart';
 
 class CategoryRepository {
   final RestClient _restClient;
-  
+
   CategoryRepository(this._restClient);
 
   Future<List<CategoryModel>> getCategories() async {
@@ -20,20 +20,27 @@ class CategoryRepository {
 
   Future<CategoryModel> createCategory({
     required String name,
+    required String typeId,
     required File icon,
   }) async {
-    final res = await _restClient.createCategory(name: name, icon: icon);
+    final res = await _restClient.createCategory(
+      name: name,
+      icon: icon,
+      typeId: typeId,
+    );
     return res;
   }
 
   Future<CategoryModel> updateCategory({
     required String id,
     String? name,
+    String? typeId,
     File? icon,
   }) async {
     final res = await _restClient.updateCategory(
       id: id,
       name: name,
+      typeId: typeId,
       icon: icon,
     );
     return res;
