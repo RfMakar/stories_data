@@ -6,8 +6,12 @@ class CategoryTypeRepository {
 
   CategoryTypeRepository(this._restClient);
 
-  Future<List<CategoryTypeModel>> getCategoriesTypes() async {
-    final res = await _restClient.getCategoriesTypes();
+  Future<List<CategoryTypeModel>> getCategoriesTypes({
+    bool? withCategories,
+  }) async {
+    final res = await _restClient.getCategoriesTypes(
+      withCategories: withCategories,
+    );
     return res;
   }
 
@@ -25,10 +29,7 @@ class CategoryTypeRepository {
     required String id,
     required String name,
   }) async {
-    final res = await _restClient.updateCategoryType(
-      id: id,
-      name: name,
-    );
+    final res = await _restClient.updateCategoryType(id: id, name: name);
     return res;
   }
 

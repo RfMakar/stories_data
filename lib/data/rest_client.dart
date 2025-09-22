@@ -81,7 +81,9 @@ abstract class RestClient {
 
   //CategoryType
   @GET(EndPoints.categoryType)
-  Future<List<CategoryTypeModel>> getCategoriesTypes();
+  Future<List<CategoryTypeModel>> getCategoriesTypes({
+    @Query('withCategories') bool? withCategories,
+  });
 
   @GET('${EndPoints.categoryType}{id}')
   Future<CategoryTypeModel> getCategoryType({@Path() required String id});
