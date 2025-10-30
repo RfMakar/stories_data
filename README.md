@@ -1,39 +1,59 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+## Stories Data
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
+Stories Data — общий пакет данных для экосистемы “Сказки для детей”. Пакет реализует модели данных, REST-клиент и репозитории для взаимодействия с сервером. Используется как зависимость в других проектах для унификации логики и структуры данных.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
+## Архитектура и структура проекта
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+lib
+ ┣ core
+ ┃ ┣ utils
+ ┃ ┃ ┗ logger.dart
+ ┃ ┣ constans.dart
+ ┃ ┣ di_stories_data.dart
+ ┃ ┗ endpoints.dart
+ ┣ data
+ ┃ ┣ dio_client.dart
+ ┃ ┣ rest_client.dart
+ ┃ ┗ rest_client.g.dart
+ ┣ domain
+ ┃ ┗ period.dart
+ ┣ models
+ ┃ ┣ category_model.dart
+ ┃ ┣ category_model.g.dart
+ ┃ ┣ category_type_model.dart
+ ┃ ┣ category_type_model.g.dart
+ ┃ ┣ index.dart
+ ┃ ┣ story_model.dart
+ ┃ ┗ story_model.g.dart
+ ┣ repositories
+ ┃ ┣ category_repository.dart
+ ┃ ┣ category_type_repository.dart
+ ┃ ┣ index.dart
+ ┃ ┣ search_repository.dart
+ ┃ ┣ story_categories_repository.dart
+ ┃ ┣ story_popular_repository.dart
+ ┃ ┗ story_repository.dart
+ ┣ index.dart
+ ┣ main.dart
+ ┗ stories_data.dart
 
-## Features
+ ## Технологии:
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Язык: Dart
+- HTTP клиент: Dio + Retrofit
+- Сериализация: json_serializable
+- DI: get_it
+- Логирование: logger
+- Конфигурация окружения: dotenv
+- Сравнение объектов: equatable
+- Генерация кода: build_runner
 
-## Getting started
+## Связанные репозитории:
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+[Серверное приложение](https://github.com/RfMakar/stories_server)  
+[Клиентское приложение](https://github.com/RfMakar/stories_client)  
+[Админ приложение](https://github.com/RfMakar/stories_admin)  
+[Пакет данных](https://github.com/RfMakar/stories_data) 
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+## Автор
+**Максим Макарчук**
