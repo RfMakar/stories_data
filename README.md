@@ -4,6 +4,7 @@ Stories Data — общий пакет данных для экосистемы 
 
 ## Архитектура и структура проекта
 
+```
 lib
  ┣ core
  ┃ ┣ utils
@@ -36,6 +37,7 @@ lib
  ┣ index.dart
  ┣ main.dart
  ┗ stories_data.dart
+```
 
  ## Технологии:
 
