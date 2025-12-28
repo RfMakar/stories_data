@@ -24,5 +24,7 @@ Future<void> setupDiStroiesData({required String apiKey}) async {
 
   diStoriesData.registerLazySingleton(() => StoryPopularRepository(diStoriesData()));
 
-   diStoriesData.registerLazySingleton(() => SearchRepository(diStoriesData()));
+  diStoriesData.registerLazySingleton(() => SearchRepository(diStoriesData()));
+
+  diStoriesData.registerLazySingleton(() => StatsRepository(diStoriesData()));
 }

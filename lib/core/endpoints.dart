@@ -1,8 +1,9 @@
 abstract final class EndPoints {
   static const category = 'category/';
-   static const categoryType = 'category_type/';
+  static const categoryType = 'category_type/';
   static const categories = 'categories/';
   static const story = 'story/';
   static const storyPopular = 'story_popular/';
   static const search = 'search/';
+  static const stats = 'stats/';
 }
