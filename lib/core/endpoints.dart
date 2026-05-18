@@ -7,3 +7,9 @@ abstract final class EndPoints {
   static const search = 'search/';
   static const stats = 'stats/';
 }
+
+abstract final class ContentEndPoints {
+  static const String generateText = '/generate/text';
+  static const String generateImage = '/generate/image';
+  static const String generateAudio = '/generate/audio';
+}

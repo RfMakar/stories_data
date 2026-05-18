@@ -5,7 +5,6 @@ import 'package:retrofit/retrofit.dart';
 import 'package:stories_data/core/constans.dart';
 import 'package:stories_data/core/endpoints.dart';
 import 'package:stories_data/models/category_type_model.dart';
-import 'package:stories_data/models/reads_stats_model.dart';
 
 import '../models/index.dart';
 

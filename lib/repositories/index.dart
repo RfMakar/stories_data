@@ -5,3 +5,4 @@ export 'story_categories_repository.dart';
 export 'story_popular_repository.dart';
 export 'search_repository.dart';
 export 'stats_repository.dart';
+export 'content_repository.dart';
